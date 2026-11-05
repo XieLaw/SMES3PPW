@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Katalog layanan pengadaan korporat Gandewa Production.">
+    <title>Gandewa Production | Solusi Pengadaan Korporat</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #263238;
+            --muted: #647178;
+            --brand: #ed7b3b;
+            --brand-dark: #c85c22;
+            --paper: #fffaf6;
+            --line: #eadfd6;
+            --surface: #ffffff;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--brand-dark);
+        }
+
+        .site-header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(240px, 290px);
+            grid-template-rows: auto 1fr;
+            align-items: start;
+            gap: 0 1.5rem;
+            padding: 1rem max(1.25rem, calc((100% - 1120px) / 2));
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .brand img {
+            width: 150px;
+            height: 76px;
+            object-fit: contain;
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        nav {
+            margin-top: 0.75rem;
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            text-decoration: underline;
+        }
+
+        main {
+            width: min(1120px, calc(100% - 2.5rem));
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 3rem 0;
+            scroll-margin-top: 1rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+            align-items: center;
+            gap: 2rem;
+            padding: 4rem 0 3rem;
+        }
+
+        .eyebrow {
+            color: var(--brand-dark);
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2;
+        }
+
+        h1 {
+            max-width: 720px;
+            margin: 0.5rem 0 1rem;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+        }
+
+        .hero-copy {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .hero-card,
+        .content-card,
+        .cart-panel {
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 1rem;
+            box-shadow: 0 12px 30px rgb(61 43 29 / 6%);
+        }
+
+        .hero-card strong {
+            color: var(--brand-dark);
+            font-size: 1.3rem;
+        }
+
+        .cart-panel {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            width: 100%;
+            background: rgba(255, 250, 246, 0.96);
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cart-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .cart-header span {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .cart-items {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .cart-items li {
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.95rem;
+        }
+
+        .cart-item-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            font-weight: 700;
+        }
+
+        .cart-item-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .empty-cart {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .cart-summary {
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .cart-summary-row strong {
+            color: var(--brand-dark);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cart-actions button {
+            flex: 1;
+        }
+
+        .checkout-btn {
+            background: var(--brand-dark);
+            color: #fff;
+        }
+
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.75rem;
+            padding-left: 1.25rem;
+        }
+
+        .category-list li {
+            padding: 0.8rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 0.6rem;
+        }
+
+        .steps {
+            padding-left: 1.4rem;
+        }
+
+        .steps li {
+            margin: 0.65rem 0;
+            padding-left: 0.35rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 0.8rem;
+        }
+
+        table {
+            width: 100%;
+            min-width: 820px;
+            border-collapse: collapse;
+        }
+
+        caption {
+            padding: 1rem;
+            color: var(--muted);
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 0.85rem;
+            border: 1px solid var(--line);
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        thead th {
+            color: #fff;
+            background: #39474d;
+        }
+
+        thead tr:first-child th {
+            color: var(--ink);
+            background: #f5e5d8;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fffaf6;
+        }
+
+        .product-image {
+            display: block;
+            width: 112px;
+            height: 82px;
+            object-fit: cover;
+            border-radius: 0.4rem;
+        }
+
+        tfoot th,
+        tfoot td {
+            font-weight: 800;
+            background: #f5e5d8;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .field-full,
+        fieldset,
+        .form-actions,
+        #order-result {
+            grid-column: 1 / -1;
+        }
+
+        label,
+        legend {
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.7rem 0.75rem;
+            color: var(--ink);
+            background: #fff;
+            border: 1px solid #c9c0ba;
+            border-radius: 0.45rem;
+            font: inherit;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 3px solid rgb(237 123 59 / 24%);
+            border-color: var(--brand);
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            border-radius: 0.6rem;
+        }
+
+        .choice-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .choice {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .choice input {
+            width: auto;
+        }
+
+        .preorder-designer {
+            grid-column: 1 / -1;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            border-radius: 0.75rem;
+            background: #fffaf6;
+        }
+
+        .preorder-designer h3 {
+            margin: 0 0 0.35rem;
+        }
+
+        .designer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .designer-side {
+            display: grid;
+            gap: 0.65rem;
+            padding: 0.85rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 0.6rem;
+        }
+
+        .designer-side h4 {
+            margin: 0;
+        }
+
+        .shirt-preview {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 190px;
+            overflow: hidden;
+            background: #f2efec;
+            border-radius: 0.45rem;
+        }
+
+        .shirt-preview svg {
+            width: 150px;
+            max-height: 180px;
+        }
+
+        .shirt-preview img {
+            position: absolute;
+            top: 43%;
+            left: 50%;
+            width: 52px;
+            height: 58px;
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+        }
+
+        .designer-help,
+        .upload-status {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .upload-status {
+            min-height: 1.3em;
+        }
+
+        .cart-designs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.55rem;
+        }
+
+        .cart-design {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        .cart-design img {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            background: #f2efec;
+            border: 1px solid var(--line);
+            border-radius: 0.25rem;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        button {
+            padding: 0.75rem 1.15rem;
+            border: 0;
+            border-radius: 0.45rem;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            color: #fff;
+            background: var(--brand-dark);
+        }
+
+        button[type="reset"],
+        .secondary-btn {
+            color: var(--ink);
+            background: #ece6e1;
+        }
+
+        #order-result {
+            min-height: 1.5rem;
+            margin: 0;
+            color: #285d3c;
+            font-weight: 700;
+        }
+
+        .site-footer {
+            padding: 1.5rem max(1.25rem, calc((100% - 1120px) / 2));
+            color: #f9f4ef;
+            background: #263238;
+        }
+
+        .site-footer p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .site-header {
+                display: block;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 2.5rem;
+            }
+
+            .brand {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .cart-panel {
+                margin-top: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .designer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">
+            <img src="image/logo 2.jpeg" alt="Logo Gandewa Pramatya Arta">
+            <p><strong>Gandewa Production</strong><br>Solusi pengadaan untuk kebutuhan korporat.</p>
+        </div>
+        <nav aria-label="Navigasi utama">
+            <ul>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#katalog">Katalog</a></li>
+                <li><a href="#alur">Alur pemesanan</a></li>
+                <li><a href="#form">Form pemesanan</a></li>
+            </ul>
+        </nav>
+        <aside class="cart-panel" aria-live="polite" aria-label="Keranjang pesanan">
+            <div class="cart-header">
+                <h3>Keranjang</h3>
+                <span id="cart-count">0 item</span>
+            </div>
+            <ul id="cart-items" class="cart-items">
+                <li class="empty-cart">Belum ada barang yang dipilih.</li>
+            </ul>
+            <div class="cart-summary">
+                <div class="cart-summary-row">
+                    <span>Total</span>
+                    <strong id="cart-total">Rp 0</strong>
+                </div>
+                <div class="cart-actions">
+                    <button type="button" id="clear-cart-btn" class="secondary-btn">Hapus</button>
+                    <button type="button" id="checkout-btn" class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+        </aside>
+    </header>
+
+    <main>
+        <section class="hero" id="tentang">
+            <div>
+                <p class="eyebrow">Gandewa Pramatya Arta · @Dffarv._</p>
+                <h1>Pengadaan korporat, lebih praktis bersama Gandewa.</h1>
+                <p class="hero-copy">Satu mitra untuk kebutuhan alat tulis kantor, merchandise, percetakan, training kit, dan seragam perusahaan.</p>
+            </div>
+            <article class="hero-card">
+                <h2>Mitra kebutuhan bisnis Anda</h2>
+                <p>Dari perencanaan hingga barang siap digunakan, kami membantu tim mendapatkan kebutuhan kantor dan acara dalam satu proses pemesanan.</p>
+                <strong>5 kategori layanan</strong>
+            </article>
+        </section>
+
+        <section id="kategori">
+            <h2>Kategori layanan</h2>
+            <ul class="category-list">
+                <li>ATK dan alat operasional kantor</li>
+                <li>Merchandise dan pouch custom</li>
+                <li>Kartu nama dan percetakan</li>
+                <li>Event, training, dan training kit</li>
+                <li>Konveksi kaos dan seragam kantor</li>
+            </ul>
+        </section>
+
+        <section id="katalog">
+            <h2>Katalog layanan</h2>
+            <div class="table-wrap">
+                <table>
+                    <caption>20 layanan untuk pengadaan kantor, merchandise, percetakan, event, dan custom apparel. Harga awal dapat berubah sesuai spesifikasi dan jumlah pesanan.</caption>
+                    <thead>
+                        <tr>
+                            <th colspan="6" scope="colgroup">Daftar Layanan Gandewa Production</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Kode</th>
+                            <th scope="col">Nama layanan</th>
+                            <th scope="col">Spesifikasi</th>
+                            <th scope="col">Estimasi harga</th>
+                            <th scope="col">Minimum order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img class="product-image" src="image/atk.jpeg" alt="Contoh paket ATK kantor"></td>
+                            <td>GDW-001</td>
+                            <td>Paket Pengadaan ATK Kantor</td>
+                            <td>Kertas A4 80 gr, pulpen, filing, binder; pengiriman Jakarta.</td>
+                            <td>Rp 1.500.000</td>
+                            <td>1 paket</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/merchendise.jpeg" alt="Contoh pouch merchandise custom"></td>
+                            <td>GDW-002</td>
+                            <td>Custom Pouch Merchandise</td>
+                            <td>Bahan kanvas atau kulit sintetis, logo custom, pilihan warna.</td>
+                            <td>Rp 35.000</td>
+                            <td>50 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/printing.jpeg" alt="Contoh kartu nama dan hasil percetakan"></td>
+                            <td>GDW-003</td>
+                            <td>Cetak Kartu Nama &amp; Identity Kit</td>
+                            <td>Art carton 260 gr, cetak dua sisi, finishing doff atau glossy.</td>
+                            <td>Rp 65.000</td>
+                            <td>5 box</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/training.jpeg" alt="Contoh layanan event dan training korporat"></td>
+                            <td>GDW-004</td>
+                            <td>Corporate Event &amp; Training</td>
+                            <td>Fasilitator, modul dan kit training, dokumentasi kegiatan.</td>
+                            <td>Rp 12.000.000</td>
+                            <td>1 kegiatan</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh kaos dan polo kantor"></td>
+                            <td>GDW-005</td>
+                            <td>Konveksi Kaos &amp; Polo Kantor</td>
+                            <td>Katun CVC atau combed, bordir komputer, ukuran S–XXXL.</td>
+                            <td>Rp 85.000</td>
+                            <td>24 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh kaos custom sablon"></td>
+                            <td>GDW-006</td>
+                            <td>Kaos Custom Sablon Combed</td>
+                            <td>Katun combed 24s/30s, sablon plastisol atau DTF, desain depan dan belakang.</td>
+                            <td>Rp 95.000</td>
+                            <td>24 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh kaos oversized custom"></td>
+                            <td>GDW-007</td>
+                            <td>Kaos Oversized Custom</td>
+                            <td>Katun combed 20s, potongan oversized, cetak desain satu sisi.</td>
+                            <td>Rp 115.000</td>
+                            <td>24 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh hoodie custom logo"></td>
+                            <td>GDW-008</td>
+                            <td>Hoodie Custom Bordir</td>
+                            <td>Fleece cotton, hoodie bertali, bordir logo satu posisi.</td>
+                            <td>Rp 185.000</td>
+                            <td>12 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh jaket bomber custom"></td>
+                            <td>GDW-009</td>
+                            <td>Jaket Bomber Custom</td>
+                            <td>Bahan taslan, resleting depan, bordir logo perusahaan.</td>
+                            <td>Rp 275.000</td>
+                            <td>12 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh jersey tim custom"></td>
+                            <td>GDW-010</td>
+                            <td>Jersey Tim Custom</td>
+                            <td>Bahan dry-fit, nama dan nomor pemain, sublimasi desain penuh.</td>
+                            <td>Rp 135.000</td>
+                            <td>12 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh kemeja seragam kantor"></td>
+                            <td>GDW-011</td>
+                            <td>Kemeja Seragam Kantor</td>
+                            <td>American drill, lengan pendek/panjang, bordir logo dan ukuran custom.</td>
+                            <td>Rp 195.000</td>
+                            <td>12 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh rompi kerja custom"></td>
+                            <td>GDW-012</td>
+                            <td>Rompi Kerja Custom</td>
+                            <td>American drill dengan saku depan dan bordir identitas perusahaan.</td>
+                            <td>Rp 145.000</td>
+                            <td>12 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh apron custom untuk staf"></td>
+                            <td>GDW-013</td>
+                            <td>Apron Seragam Custom</td>
+                            <td>Kanvas atau drill, tali adjustable, saku depan, opsi sablon logo.</td>
+                            <td>Rp 78.000</td>
+                            <td>24 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/tshirt.jpeg" alt="Contoh topi perusahaan custom"></td>
+                            <td>GDW-014</td>
+                            <td>Topi Perusahaan Custom</td>
+                            <td>Topi baseball bahan twill, bordir logo depan, strap adjustable.</td>
+                            <td>Rp 55.000</td>
+                            <td>24 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/merchendise.jpeg" alt="Contoh tote bag merchandise custom"></td>
+                            <td>GDW-015</td>
+                            <td>Tote Bag Kanvas Custom</td>
+                            <td>Kanvas 12 oz, ukuran custom, sablon logo satu sisi.</td>
+                            <td>Rp 48.000</td>
+                            <td>50 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/merchendise.jpeg" alt="Contoh goodie bag custom"></td>
+                            <td>GDW-016</td>
+                            <td>Goodie Bag Event</td>
+                            <td>Spunbond tebal dengan cetak logo satu warna untuk seminar atau acara kantor.</td>
+                            <td>Rp 12.000</td>
+                            <td>100 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/printing.jpeg" alt="Contoh lanyard dengan cetak logo"></td>
+                            <td>GDW-017</td>
+                            <td>Lanyard ID Card Custom</td>
+                            <td>Tali polyester 2 cm, cetak full color dua sisi, kait metal.</td>
+                            <td>Rp 18.000</td>
+                            <td>100 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/printing.jpeg" alt="Contoh kartu identitas karyawan"></td>
+                            <td>GDW-018</td>
+                            <td>ID Card Karyawan</td>
+                            <td>Kartu PVC full color dua sisi, termasuk desain dan holder standar.</td>
+                            <td>Rp 15.000</td>
+                            <td>50 pcs</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/printing.jpeg" alt="Contoh banner promosi cetak"></td>
+                            <td>GDW-019</td>
+                            <td>Banner &amp; X-Banner Event</td>
+                            <td>Cetak indoor full color; tersedia bahan flexi atau paket X-banner.</td>
+                            <td>Rp 95.000</td>
+                            <td>1 set</td>
+                        </tr>
+                        <tr>
+                            <td><img class="product-image" src="image/merchendise.jpeg" alt="Contoh paket gift set korporat"></td>
+                            <td>GDW-020</td>
+                            <td>Corporate Gift Set Custom</td>
+                            <td>Paket pouch, tumbler, dan kartu ucapan dalam kemasan box dengan logo.</td>
+                            <td>Rp 225.000</td>
+                            <td>20 paket</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" scope="row">Rekapitulasi: 20 jenis layanan</th>
+                            <td colspan="2">Stok dan ketersediaan dikonfirmasi saat pemesanan.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section id="alur">
+            <h2>Alur pemesanan layanan</h2>
+            <ol class="steps">
+                <li>Pilih layanan dan tentukan spesifikasi atau varian yang dibutuhkan.</li>
+                <li>Kirim data pemesan, kuantitas, dan preferensi pengadaan melalui formulir.</li>
+                <li>Tim Gandewa meninjau kebutuhan dan mengonfirmasi ketersediaan serta harga akhir.</li>
+                <li>Setujui penawaran dan mockup bila diperlukan, kemudian lakukan pembayaran sesuai kesepakatan.</li>
+                <li>Pesanan diproduksi atau disiapkan, lalu dikirim atau dilaksanakan sesuai jadwal.</li>
+            </ol>
+        </section>
+
+        <section id="form">
+            <h2>Formulir pemesanan</h2>
+            <article class="content-card">
+                <p>Lengkapi kebutuhan Anda. Formulir ini menampilkan pratinjau estimasi di halaman dan belum mengirim data ke server.</p>
+                <form id="order-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="kode">Kode layanan</label>
+                            <input type="text" id="kode" name="kode" value="GDW-001" required>
+                        </div>
+                        <div class="field">
+                            <label for="nama">Nama pemesan</label>
+                            <input type="text" id="nama" name="nama" autocomplete="name" required>
+                        </div>
+                        <div class="field field-full">
+                            <label for="layanan">Layanan yang dipesan</label>
+                            <select id="layanan" name="layanan" required>
+                                <option value="GDW-001" data-price="1500000" data-minimum="1">GDW-001 — Paket Pengadaan ATK Kantor</option>
+                                <option value="GDW-002" data-price="35000" data-minimum="50">GDW-002 — Custom Pouch Merchandise</option>
+                                <option value="GDW-003" data-price="65000" data-minimum="5">GDW-003 — Cetak Kartu Nama &amp; Identity Kit</option>
+                                <option value="GDW-004" data-price="12000000" data-minimum="1">GDW-004 — Corporate Event &amp; Training</option>
+                                <option value="GDW-005" data-price="85000" data-minimum="24">GDW-005 — Konveksi Kaos &amp; Polo Kantor</option>
+                                <option value="GDW-006" data-price="95000" data-minimum="24">GDW-006 — Kaos Custom Sablon Combed</option>
+                                <option value="GDW-007" data-price="115000" data-minimum="24">GDW-007 — Kaos Oversized Custom</option>
+                                <option value="GDW-008" data-price="185000" data-minimum="12">GDW-008 — Hoodie Custom Bordir</option>
+                                <option value="GDW-009" data-price="275000" data-minimum="12">GDW-009 — Jaket Bomber Custom</option>
+                                <option value="GDW-010" data-price="135000" data-minimum="12">GDW-010 — Jersey Tim Custom</option>
+                                <option value="GDW-011" data-price="195000" data-minimum="12">GDW-011 — Kemeja Seragam Kantor</option>
+                                <option value="GDW-012" data-price="145000" data-minimum="12">GDW-012 — Rompi Kerja Custom</option>
+                                <option value="GDW-013" data-price="78000" data-minimum="24">GDW-013 — Apron Seragam Custom</option>
+                                <option value="GDW-014" data-price="55000" data-minimum="24">GDW-014 — Topi Perusahaan Custom</option>
+                                <option value="GDW-015" data-price="48000" data-minimum="50">GDW-015 — Tote Bag Kanvas Custom</option>
+                                <option value="GDW-016" data-price="12000" data-minimum="100">GDW-016 — Goodie Bag Event</option>
+                                <option value="GDW-017" data-price="18000" data-minimum="100">GDW-017 — Lanyard ID Card Custom</option>
+                                <option value="GDW-018" data-price="15000" data-minimum="50">GDW-018 — ID Card Karyawan</option>
+                                <option value="GDW-019" data-price="95000" data-minimum="1">GDW-019 — Banner &amp; X-Banner Event</option>
+                                <option value="GDW-020" data-price="225000" data-minimum="20">GDW-020 — Corporate Gift Set Custom</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="varian">Varian</label>
+                            <select id="varian" name="varian">
+                                <option value="Standar">Standar</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Custom">Custom sesuai brief</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="kuantitas">Kuantitas</label>
+                            <input type="number" id="kuantitas" name="kuantitas" min="1" value="1" required>
+                            <small id="minimum-note">Minimum order layanan terpilih: 1 unit.</small>
+                        </div>
+                        <div class="field">
+                            <label for="harga">Estimasi harga per unit (Rp)</label>
+                            <input type="number" id="harga" name="harga" min="1" value="1500000" required>
+                        </div>
+                        <fieldset>
+                            <legend>Model pengadaan</legend>
+                            <div class="choice-list">
+                                <label class="choice" for="ready-stock"><input type="radio" id="ready-stock" name="model" value="Ready Stock" required> Ready Stock</label>
+                                <label class="choice" for="pre-order"><input type="radio" id="pre-order" name="model" value="Pre-Order"> Pre-Order</label>
+                            </div>
+                        </fieldset>
+                        <div id="preorder-designer" class="preorder-designer" hidden>
+                            <h3>Referensi desain Pre-Order</h3>
+                            <p class="designer-help">Unggah desain yang ingin dicetak atau dibordir. Minimal satu sisi wajib diisi untuk Pre-Order; Anda dapat mengunggah sisi depan, belakang, atau keduanya. Maksimal 5 MB per gambar.</p>
+                            <div class="designer-grid">
+                                <div class="designer-side">
+                                    <h4>Bagian depan</h4>
+                                    <div class="shirt-preview" aria-label="Pratinjau desain bagian depan">
+                                        <svg viewBox="0 0 240 240" role="img" aria-label="Siluet kaos bagian depan">
+                                            <path d="M75 26 94 18h52l19 8 48 32-24 39-25-14v130H76V83L51 97 27 58z" fill="#d2ccc6" stroke="#887f78" stroke-width="4" stroke-linejoin="round"/>
+                                            <path d="M94 19c2 19 11 29 26 29s24-10 26-29" fill="none" stroke="#887f78" stroke-width="4"/>
+                                        </svg>
+                                        <img id="front-preview" alt="Desain yang diunggah untuk bagian depan" hidden>
+                                    </div>
+                                    <label for="front-design">Foto/desain depan</label>
+                                    <input type="file" id="front-design" name="front-design" accept="image/*">
+                                    <p class="upload-status" id="front-status" aria-live="polite">Belum ada desain depan.</p>
+                                </div>
+                                <div class="designer-side">
+                                    <h4>Bagian belakang</h4>
+                                    <div class="shirt-preview" aria-label="Pratinjau desain bagian belakang">
+                                        <svg viewBox="0 0 240 240" role="img" aria-label="Siluet kaos bagian belakang">
+                                            <path d="M75 26 94 18h52l19 8 48 32-24 39-25-14v130H76V83L51 97 27 58z" fill="#d2ccc6" stroke="#887f78" stroke-width="4" stroke-linejoin="round"/>
+                                            <path d="M94 23c5 11 14 17 26 17s21-6 26-17" fill="none" stroke="#887f78" stroke-width="4"/>
+                                        </svg>
+                                        <img id="back-preview" alt="Desain yang diunggah untuk bagian belakang" hidden>
+                                    </div>
+                                    <label for="back-design">Foto/desain belakang</label>
+                                    <input type="file" id="back-design" name="back-design" accept="image/*">
+                                    <p class="upload-status" id="back-status" aria-live="polite">Belum ada desain belakang.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field field-full">
+                            <span><strong>Persetujuan sampel</strong></span>
+                            <label class="choice" for="mockup">
+                                <input type="checkbox" id="mockup" name="mockup" value="ya">
+                                Saya ingin melihat sampel atau mockup sebelum produksi.
+                            </label>
+                        </div>
+                        <div class="field field-full">
+                            <label for="catatan">Catatan kebutuhan</label>
+                            <textarea id="catatan" name="catatan" rows="4" placeholder="Tuliskan detail ukuran, warna, jadwal, atau kebutuhan khusus."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Buat pratinjau pesanan</button>
+                            <button type="reset">Reset formulir</button>
+                        </div>
+                        <p id="order-result" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p><strong>Gandewa Production — Gandewa Pramatya Arta</strong></p>
+        <p>Instagram: @Dffarv._ · Vendor pengadaan barang dan jasa korporat.</p>
+    </footer>
+
+    <script>
+        const orderForm = document.querySelector("#order-form");
+        const serviceSelect = document.querySelector("#layanan");
+        const codeInput = document.querySelector("#kode");
+        const priceInput = document.querySelector("#harga");
+        const quantityInput = document.querySelector("#kuantitas");
+        const minimumNote = document.querySelector("#minimum-note");
+        const result = document.querySelector("#order-result");
+        const cartItemsList = document.querySelector("#cart-items");
+        const cartTotal = document.querySelector("#cart-total");
+        const cartCount = document.querySelector("#cart-count");
+        const clearCartBtn = document.querySelector("#clear-cart-btn");
+        const checkoutBtn = document.querySelector("#checkout-btn");
+        const preorderDesigner = document.querySelector("#preorder-designer");
+        const frontDesignInput = document.querySelector("#front-design");
+        const backDesignInput = document.querySelector("#back-design");
+        const designPreviews = {
+            front: document.querySelector("#front-preview"),
+            back: document.querySelector("#back-preview")
+        };
+        const designStatuses = {
+            front: document.querySelector("#front-status"),
+            back: document.querySelector("#back-status")
+        };
+        const designObjectUrls = { front: null, back: null };
+        const currencyFormatter = new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            maximumFractionDigits: 0
+        });
+        const productIllustrations = {
+            "GDW-001": { type: "stationery", color: "#e7a14a" },
+            "GDW-002": { type: "pouch", color: "#39716c" },
+            "GDW-003": { type: "cards", color: "#344d66" },
+            "GDW-004": { type: "event", color: "#d9874b" },
+            "GDW-005": { type: "polo", color: "#39716c" },
+            "GDW-006": { type: "tee", color: "#d9874b" },
+            "GDW-007": { type: "oversized", color: "#344d66" },
+            "GDW-008": { type: "hoodie", color: "#657d91" },
+            "GDW-009": { type: "jacket", color: "#344d66" },
+            "GDW-010": { type: "jersey", color: "#39716c" },
+            "GDW-011": { type: "shirt", color: "#e7a14a" },
+            "GDW-012": { type: "vest", color: "#e7a14a" },
+            "GDW-013": { type: "apron", color: "#657d91" },
+            "GDW-014": { type: "cap", color: "#d9874b" },
+            "GDW-015": { type: "tote", color: "#bd8b5a" },
+            "GDW-016": { type: "goodie", color: "#657d91" },
+            "GDW-017": { type: "lanyard", color: "#39716c" },
+            "GDW-018": { type: "idcard", color: "#344d66" },
+            "GDW-019": { type: "banner", color: "#d9874b" },
+            "GDW-020": { type: "gift", color: "#bd8b5a" }
+        };
+        const garmentShapes = {
+            tee: '<path d="M75 36 96 27h48l21 9 44 26-21 34-23-14v76H75V82l-23 14-21-34z"/><path d="M96 28c3 15 11 22 24 22s21-7 24-22" fill="none" stroke="#fff" stroke-width="4"/>',
+            oversized: '<path d="M68 35 94 26h52l26 9 45 29-20 37-27-17v75H70V84l-27 17-20-37z"/><path d="M96 27c3 15 11 22 24 22s21-7 24-22" fill="none" stroke="#fff" stroke-width="4"/>',
+            polo: '<path d="M75 36 96 27h48l21 9 44 26-21 34-23-14v76H75V82l-23 14-21-34z"/><path d="m96 28 24 24 24-24-11 27h-26z" fill="#fff"/><path d="M120 53v25m0-18h7m-7 9h7" fill="none" stroke="#344d66" stroke-width="3"/>',
+            hoodie: '<path d="M83 43 97 31h46l14 12 35 18 20 31-23 18-22-17v70H73V93l-22 17-23-18 20-31z"/><path d="M96 35c1-21 11-31 24-31s23 10 24 31l-24 18z" stroke="#fff" stroke-width="4"/><path d="M120 53v55m-14-12 14 12 14-12" fill="none" stroke="#fff" stroke-width="4"/>',
+            jacket: '<path d="M77 36 97 27h46l20 9 42 25 21 32-23 17-22-16v76H79V94l-22 16-23-17 21-32z"/><path d="M97 29 120 52l23-23m-23 23v118" fill="none" stroke="#fff" stroke-width="4"/><path d="M88 112h16m32 0h16" stroke="#fff" stroke-width="4"/>',
+            jersey: '<path d="M75 36 96 27h48l21 9 44 26-21 34-23-14v76H75V82l-23 14-21-34z"/><path d="M96 28c3 15 11 22 24 22s21-7 24-22" fill="none" stroke="#fff" stroke-width="4"/><path d="m51 44 25 18-15 17-22-18m150-17-25 18 15 17 22-18" fill="#fff" opacity=".8"/>',
+            shirt: '<path d="M75 36 96 27h48l21 9 44 26-21 34-23-14v76H75V82l-23 14-21-34z"/><path d="m96 28 24 24 24-24-10 29h-28z" fill="#fff"/><path d="M120 58v76m-30-45h17m26 0h17" fill="none" stroke="#fff" stroke-width="3"/>',
+            vest: '<path d="M85 35 98 28h44l13 7 28 24-18 30-23-15 9 89H89l9-89-23 15-18-30z"/><path d="m98 29 22 26 22-26m-22 26v108m-20-71h14m26 0h14" fill="none" stroke="#fff" stroke-width="4"/>',
+            apron: '<path d="M94 28h52l8 28 29 20-15 91H72L57 76l29-20z"/><path d="M95 30c1 24 9 35 25 35s24-11 25-35M87 95h66v40H87z" fill="none" stroke="#fff" stroke-width="4"/>',
+            cap: '<path d="M57 96c2-42 28-68 63-68s61 26 63 68z"/><path d="M57 96c25 15 76 18 126 0 3 19-17 34-47 34H83c-16 0-26-12-26-34z" fill-opacity=".72"/>'
+        };
+        const productShapes = {
+            stationery: '<rect x="57" y="46" width="126" height="102" rx="8"/><path d="M74 67h91M74 83h74M74 99h88M74 115h54" stroke="#fff" stroke-width="5"/><path d="m163 42 16 6-37 89-16-6z" fill="#d9874b" stroke="#fff" stroke-width="3"/>',
+            pouch: '<rect x="59" y="54" width="122" height="88" rx="12"/><path d="M65 68h110" stroke="#fff" stroke-width="5"/><circle cx="170" cy="68" r="4" fill="#fff"/>',
+            cards: '<rect x="51" y="58" width="125" height="75" rx="7" transform="rotate(-8 51 58)" opacity=".55"/><rect x="65" y="68" width="125" height="75" rx="7" fill="#fff"/><path d="M80 89h60m-60 12h42" stroke="#344d66" stroke-width="4"/>',
+            event: '<rect x="50" y="38" width="140" height="91" rx="8"/><path d="M66 54h108v59H66z" fill="#fff" opacity=".9"/><path d="M82 97h19V78l16-12 16 12v19h19" fill="none" stroke="#d9874b" stroke-width="5"/><path d="M120 129v14m-30 6h60" stroke="#657d91" stroke-width="6"/>',
+            tote: '<path d="M65 64h110l12 94H53z"/><path d="M89 67V52c0-22 9-33 31-33s31 11 31 33v15" fill="none" stroke="#bd8b5a" stroke-width="10"/>',
+            goodie: '<path d="M72 61h96l-8 96H80z"/><path d="M96 62c0-24 8-35 24-35s24 11 24 35m-39 0c0-18-8-27-20-27m55 27c0-18 8-27 20-27" fill="none" stroke="#657d91" stroke-width="8"/>',
+            lanyard: '<path d="M83 34v35c0 31 74 31 74 0V34" fill="none" stroke="#39716c" stroke-width="14"/><path d="M120 98v22" stroke="#9d7e4f" stroke-width="6"/><rect x="91" y="117" width="58" height="52" rx="7" fill="#fff" stroke="#657d91" stroke-width="4"/>',
+            idcard: '<rect x="66" y="34" width="108" height="132" rx="12"/><circle cx="120" cy="79" r="19" fill="#fff"/><path d="M84 128c5-21 18-31 36-31s31 10 36 31m-70 20h68" fill="none" stroke="#fff" stroke-width="6"/>',
+            banner: '<path d="M54 32h132v96H54z"/><path d="M120 128v31m-36 8h72" stroke="#657d91" stroke-width="7"/><path d="M76 55h88v49H76z" fill="#fff" opacity=".9"/><path d="M91 91h57M91 78h38" stroke="#d9874b" stroke-width="6"/>',
+            gift: '<path d="M55 75h130v84H55z"/><path d="M48 60h144v28H48z"/><path d="M120 60c-42 0-52-38-27-38 17 0 26 22 27 38zm0 0c42 0 52-38 27-38-17 0-26 22-27 38z" fill="none" stroke="#fff" stroke-width="7"/><path d="M120 61v98" stroke="#fff" stroke-width="8"/>'
+        };
+
+        function renderProductIllustrations() {
+            for (const [code, product] of Object.entries(productIllustrations)) {
+                const image = [...document.querySelectorAll("#katalog tbody tr")]
+                    .find((row) => row.cells[1].textContent.trim() === code)
+                    ?.querySelector("img");
+                if (!image) {
+                    continue;
+                }
+
+                const shape = garmentShapes[product.type] || productShapes[product.type];
+                const badge = `<circle cx="120" cy="104" r="13" fill="#fff"/><text x="120" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="${product.color}">G</text>`;
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180"><rect width="240" height="180" rx="18" fill="#f3eee8"/><ellipse cx="120" cy="151" rx="70" ry="9" fill="#d9d0c7" opacity=".55"/><g fill="${product.color}" stroke="#fff" stroke-width="3" stroke-linejoin="round">${shape}</g>${badge}<text x="120" y="169" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#48545a">GANDEWA</text></svg>`;
+                image.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+            }
+        }
+
+        let cart = [];
+
+        function updateServiceDefaults() {
+            const option = serviceSelect.selectedOptions[0];
+            const minimum = Number(option.dataset.minimum);
+            codeInput.value = option.value;
+            priceInput.value = option.dataset.price;
+            quantityInput.min = String(minimum);
+            if (Number(quantityInput.value) < minimum) {
+                quantityInput.value = String(minimum);
+            }
+            minimumNote.textContent = `Minimum order layanan terpilih: ${minimum} unit.`;
+        }
+
+        function renderCart() {
+            cartCount.textContent = `${cart.length} item` + (cart.length === 1 ? "" : "");
+            const total = cart.reduce((sum, item) => sum + item.total, 0);
+            cartTotal.textContent = currencyFormatter.format(total);
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<li class="empty-cart">Belum ada barang yang dipilih.</li>';
+                return;
+            }
+
+            cartItemsList.innerHTML = cart.map((item) => `
+                <li>
+                    <div class="cart-item-top">
+                        <span>${item.name}</span>
+                        <span>${currencyFormatter.format(item.total)}</span>
+                    </div>
+                    <div class="cart-item-meta">
+                        <span>${item.quantity} unit · ${item.model}</span>
+                        <span>${item.code}</span>
+                    </div>
+                    ${item.frontDesign || item.backDesign ? `
+                        <div class="cart-designs">
+                            ${item.frontDesign ? `<span class="cart-design"><img src="${item.frontDesign}" alt="Desain depan ${item.name}">Depan</span>` : ""}
+                            ${item.backDesign ? `<span class="cart-design"><img src="${item.backDesign}" alt="Desain belakang ${item.name}">Belakang</span>` : ""}
+                        </div>
+                    ` : ""}
+                </li>
+            `).join("");
+        }
+
+        function renderPreorderDesigner() {
+            preorderDesigner.hidden = !document.querySelector("#pre-order").checked;
+        }
+
+        function readDesignAsDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                if (!file) {
+                    resolve("");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.addEventListener("load", () => resolve(reader.result));
+                reader.addEventListener("error", () => reject(new Error(`Gagal membaca file ${file.name}. Silakan coba pilih file lain.`)));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function connectDesignInput(input, side) {
+            input.addEventListener("change", () => {
+                const file = input.files[0];
+                const preview = designPreviews[side];
+                const status = designStatuses[side];
+
+                if (designObjectUrls[side]) {
+                    URL.revokeObjectURL(designObjectUrls[side]);
+                    designObjectUrls[side] = null;
+                }
+
+                if (!file) {
+                    preview.removeAttribute("src");
+                    preview.hidden = true;
+                    status.textContent = `Belum ada desain ${side === "front" ? "depan" : "belakang"}.`;
+                    return;
+                }
+
+                if (!file.type.startsWith("image/")) {
+                    input.value = "";
+                    preview.removeAttribute("src");
+                    preview.hidden = true;
+                    status.textContent = "File harus berupa gambar.";
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    input.value = "";
+                    preview.removeAttribute("src");
+                    preview.hidden = true;
+                    status.textContent = "Ukuran gambar melebihi 5 MB.";
+                    return;
+                }
+
+                designObjectUrls[side] = URL.createObjectURL(file);
+                preview.src = designObjectUrls[side];
+                preview.hidden = false;
+                status.textContent = `${file.name} siap dipratinjau (${(file.size / 1024).toFixed(0)} KB).`;
+            });
+        }
+
+        async function addToCart() {
+            const formData = new FormData(orderForm);
+            const code = formData.get("kode");
+            const name = serviceSelect.selectedOptions[0].textContent
+                .replace(/^\s*GDW-\d+\s*[—–-]\s*/, "")
+                .trim();
+            const quantity = Number(formData.get("kuantitas"));
+            const model = formData.get("model") || "Ready Stock";
+            const price = Number(formData.get("harga"));
+
+            try {
+                const [frontDesign, backDesign] = await Promise.all([
+                    readDesignAsDataUrl(frontDesignInput.files[0]),
+                    readDesignAsDataUrl(backDesignInput.files[0])
+                ]);
+
+                cart.push({
+                    code,
+                    name,
+                    quantity,
+                    model,
+                    total: quantity * price,
+                    frontDesign,
+                    backDesign,
+                    frontDesignName: frontDesignInput.files[0]?.name || "",
+                    backDesignName: backDesignInput.files[0]?.name || ""
+                });
+
+                renderCart();
+                result.textContent = `Barang ditambahkan ke keranjang: ${name} (${quantity} unit) — ${currencyFormatter.format(quantity * price)}. Desain custom tersimpan di item keranjang.`;
+            } catch (error) {
+                result.textContent = error.message;
+            }
+        }
+
+        serviceSelect.addEventListener("change", updateServiceDefaults);
+        document.querySelectorAll('input[name="model"]').forEach((input) => {
+            input.addEventListener("change", renderPreorderDesigner);
+        });
+        connectDesignInput(frontDesignInput, "front");
+        connectDesignInput(backDesignInput, "back");
+
+        orderForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const isPreorder = document.querySelector("#pre-order").checked;
+            if (isPreorder && !frontDesignInput.files.length && !backDesignInput.files.length) {
+                result.textContent = "Untuk Pre-Order custom, unggah minimal satu desain di bagian depan atau belakang.";
+                frontDesignInput.focus();
+                return;
+            }
+
+            const formData = new FormData(orderForm);
+            const quantity = Number(formData.get("kuantitas"));
+            const price = Number(formData.get("harga"));
+            const total = currencyFormatter.format(quantity * price);
+            const model = formData.get("model");
+            const itemName = serviceSelect.selectedOptions[0].textContent.trim();
+
+            result.textContent = `Pratinjau untuk ${formData.get("nama")}: ${itemName}, ${quantity} unit, ${model}; estimasi total ${total}. Tim Gandewa perlu mengonfirmasi harga dan minimum order sebelum pesanan diproses.`;
+            await addToCart();
+        });
+
+        orderForm.addEventListener("reset", () => {
+            window.setTimeout(() => {
+                updateServiceDefaults();
+                result.textContent = "";
+                renderPreorderDesigner();
+                for (const side of ["front", "back"]) {
+                    if (designObjectUrls[side]) {
+                        URL.revokeObjectURL(designObjectUrls[side]);
+                        designObjectUrls[side] = null;
+                    }
+                    designPreviews[side].removeAttribute("src");
+                    designPreviews[side].hidden = true;
+                    designStatuses[side].textContent = `Belum ada desain ${side === "front" ? "depan" : "belakang"}.`;
+                }
+            }, 0);
+        });
+
+        clearCartBtn.addEventListener("click", () => {
+            cart = [];
+            renderCart();
+            result.textContent = "Keranjang dibersihkan. Silakan pilih kembali layanan yang Anda inginkan.";
+        });
+
+        checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+                result.textContent = "Keranjang masih kosong. Silakan tambah layanan sebelum checkout.";
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.total, 0);
+            const orderSummary = cart.map((item) => {
+                const designs = [
+                    item.frontDesignName ? `desain depan (${item.frontDesignName})` : "",
+                    item.backDesignName ? `desain belakang (${item.backDesignName})` : ""
+                ].filter(Boolean);
+                const designRequest = designs.length ? `, ${designs.join(" dan ")}` : "";
+                return `${item.name}: ${item.quantity} unit, ${item.model}${designRequest}`;
+            }).join("; ");
+            result.textContent = `Checkout berhasil. Pesanan: ${orderSummary}. Total ${currencyFormatter.format(total)}. Tim Gandewa akan menghubungi Anda untuk konfirmasi.`;
+            cart = [];
+            renderCart();
+        });
+
+        renderProductIllustrations();
+        updateServiceDefaults();
+        renderCart();
+    </script>
+</body>
+</html>
